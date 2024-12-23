@@ -1,3 +1,10 @@
+feeAccount
+const feeAccount = await marketplace.feeAccount()
+feePercent
+const feePercent = await marketplace.feePercent()
+marketplace
+const marketplace = await ethers.getContractAt("Marketplace", "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512");
+const marketplace = await ethers getContractAt("Marketplace", "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512");
 name
 const name = contracts.name()
 tc
