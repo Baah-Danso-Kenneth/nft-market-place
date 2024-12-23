@@ -1,0 +1,6 @@
+name
+const name = contracts.name()
+tc
+const tc = contracts.tokenCount()
+contracts
+const contracts = await ethers.getContractAt("NFT", "0x5fbdb2315678afecb367f032d93f642f64180aa3");
