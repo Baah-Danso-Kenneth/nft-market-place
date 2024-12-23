@@ -1,3 +1,7 @@
+contracts
+contract
+feeAccount
+name
 feeAccount
 const feeAccount = await marketplace.feeAccount()
 feePercent
