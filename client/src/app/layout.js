@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { WalletContextProvider } from "./context/wallet";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,9 +20,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <WalletContextProvider>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>
+      </WalletContextProvider>
     </html>
   );
 }
