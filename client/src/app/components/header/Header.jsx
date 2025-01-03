@@ -49,7 +49,7 @@ function Header() {
           <div className={styles.container}>
             <div className={styles.logo}>
               <Link href="/">
-                <Image src="/logo.png" width={280} height={44} alt="logo" />
+                <Image src="/retro.png" width={280} height={44} alt="logo" />
               </Link>
             </div>
             <nav className={styles.nav}>
