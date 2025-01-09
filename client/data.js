@@ -14,7 +14,7 @@ export const navLinks=[
   {name:'home', href:"#"},
   {name:'market', href:"/marketplace"},
   {name:'collections', href:"#"},
-  {name:'createNft', href:"#"},
+  {name:'createNft', href:"/sellNFT"},
   {name:'about', href:"#"},
   {name:'about', href:"#"},
   {name:'about', href:"#"},
