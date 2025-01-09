@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 
 function Banner() {
@@ -34,6 +35,9 @@ function Banner() {
                  Distinctio consequuntur laudantium atque ducimus 
                  blanditiis, consectetur aliquid asperiores excepturi repellat nisi?</p>
           </div> */}
+          <Link href="/sellNFT" className="absolute -left-20 top-[5rem] lg:top-[27rem] xl:top-[10rem]">
+            <Image src="/images/buy_nft.png" alt="logox" className=" object-contain w-40 h-40 lg:w-96 lg:h-96" width={1080} height={200}/>
+          </Link>
 
         </div>
 

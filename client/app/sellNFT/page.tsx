@@ -1,9 +1,8 @@
+import NftCreator from '@/components/pages/sellNft'
 import React from 'react'
 
 function page() {
-  return (
-    <div>page</div>
-  )
+  return <NftCreator/>
 }
 
 export default page

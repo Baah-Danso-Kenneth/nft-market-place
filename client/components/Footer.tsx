@@ -37,7 +37,7 @@ function Footer() {
 
              <div className='border-t  justify-center  border-black flex-[20%] font-nunito uppercase md:border-0 '>
               {sociaLinks.map(social=>(
-                <Link href={social.href} className='flex justify-center items-center border-b py-3 text-[10px] md:text-[18px] border-black hover:text-red-500 last:border-b-0 dark:border-white'>
+                <Link href={social.href} key={social.name} className='flex justify-center items-center border-b py-3 text-[10px] md:text-[18px] border-black hover:text-red-500 last:border-b-0 dark:border-white'>
                   <h1 className='mr-2 ml-5 '>{social.name}</h1> 
                   {social.icon}
                 </Link>
