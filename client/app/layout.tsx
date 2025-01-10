@@ -3,6 +3,7 @@ import "./globals.css";
 import { Metadata } from "next";
 import {Allura, Nunito_Sans} from "next/font/google"
 import { WalletContextProvider } from "@/content/wallet";
+import { Toaster } from "@/components/ui/toaster";
 
 
 const nunito = Nunito_Sans({
@@ -39,6 +40,8 @@ export default function RootLayout({
         enableSystem
         disableTransitionOnChange
         >
+          <Toaster
+          />
            {children}
         </ThemeProvider>
       </body>

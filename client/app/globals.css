@@ -69,6 +69,19 @@ body {
 }
 
 
+[data-radix-toast-provider] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: fixed !important; /* Enforces the custom position */
+  top: 1rem !important;       /* Aligns to the top */
+  left: 1rem !important;      /* Aligns to the left */
+  z-index: 50;
+  pointer-events: none;
+}
+
+
+
 
 body{
   overflow-x: hidden;
