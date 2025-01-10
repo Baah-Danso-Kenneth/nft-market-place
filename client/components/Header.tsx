@@ -8,7 +8,7 @@ import { WalletContext } from "@/content/wallet";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "./ui/button";
 import { ToastAction } from "@radix-ui/react-toast";
-import {BrowserProvider, ethers} from "ethers"
+import {ethers} from "ethers"
 
 
 function Header() {
@@ -32,7 +32,8 @@ function Header() {
   
   const {toast} = useToast()
 
-  const connectWallet = async () => {
+
+  const connectWallet = async () => { 
     if (!window.ethereum) {
       toast({
         variant: "destructive",
@@ -50,22 +51,18 @@ function Header() {
     }
   
     try {
-
       const ethereumProvider = window.ethereum as ethers.Eip1193Provider;
   
-      // Create an ethers provider
       const provider = new ethers.BrowserProvider(ethereumProvider);
   
-      // Get the signer
+      // Now `await` works because the function is async
       const signer = await provider.getSigner();
       setSigner(signer);
   
-      // Request accounts
       const accounts = await provider.send("eth_requestAccounts", []);
       setIsConnected(true);
       setUserAddress(accounts[0]);
   
-      // Get the network
       const network = await provider.getNetwork();
       const chainId = network.chainId;
       const alfajoresNetworkId = "44787";
@@ -86,6 +83,7 @@ function Header() {
       });
     }
   };
+  
 
 
   return (
@@ -113,8 +111,8 @@ function Header() {
           <Link href="/marketPlace" className="py-3 md:py-5 hover:bg-black hover:text-white px-3 border-black border-l border-r dark:border-white">
             [market]
           </Link>
-          <Link href="/" className="hidden md:py-5 md:px-3 md:hover:bg-black md:block hover:text-white border-black border-r dark:border-white">
-            [list]
+          <Link href="/sellNFT" className="hidden md:py-5 md:px-3 md:hover:bg-black md:block hover:text-white border-black border-r dark:border-white">
+            [create]
           </Link>
           <Link href="/profile" className="py-3 px-10 md:px-3 md:py-5 hover:bg-black hover:text-white border-r border-black dark:border-white">
             [profile]
@@ -148,6 +146,12 @@ function Header() {
         <div className="absolute font-nunito z-50 uppercase h-[100vh] dark:bg-[#1A1C29] w-48 border   border-l-0 border-black dark:border-white bg-[#cec8bc] flex flex-col space-y-3  lg:hidden">
           <Link href="/marketPlace" className="pl-2 hover:bg-black py-2 hover:text-white border-b border-black dark:border-white">
             [market]
+          </Link>
+          <Link href="/sellNFT" className="pl-2 hover:bg-black py-2 hover:text-white border-b border-black dark:border-white">
+            [create]
+          </Link>
+          <Link href="/profile" className="pl-2 hover:bg-black py-2 hover:text-white border-b border-black dark:border-white">
+            [profile]
           </Link>
           <Link href="#collections" className="pl-2 md:hover:bg-black md:block hover:text-white border-b pb-1 border-black dark:border-white">
             [collections]
