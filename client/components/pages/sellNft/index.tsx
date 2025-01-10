@@ -1,13 +1,13 @@
 import React from 'react'
-import CreateNft from './CreateNft'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import SellNFT from './CreateNft'
 
 function NftCreator() {
   return (
     <>
      <Header/>
-     <CreateNft/>
+      <SellNFT/>
      <Footer/>
     </>
   )

@@ -11,7 +11,7 @@ function AboutUs() {
             </div>
             <div className='flex flex-col space-y-10 lg:flex-row justify-between lg:gap-20'>
              <AboutComponent text=">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam, delectus tempore. Suscipit eius a quasi velit harum! Esse necessitatibus sint eius? Non minima sunt porro, fuga incidunt hic accusamus dolor!"/>
-             <Image src="/images/brand_logo.png" width={400} height={400} alt="good" className='object-cover'/>
+             <Image src="/images/brand_logo.png" width={400} height={400} alt="good" className='object-cover dark:invert'/>
              <AboutComponent text=">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam, delectus tempore. Suscipit eius a quasi velit harum! Esse necessitatibus sint eius? Non minima sunt porro, fuga incidunt hic accusamus dolor!"/>
             </div>
         </div>
