@@ -25,66 +25,66 @@ export const navLinks=[
 export const carouselNft = [
   {
     name: 'gaming',
-    title: 'Altro-verse',
+    title: 'Altro-Verse Genesis Token',
     image: '/images/cr-1.jpeg',
-    description: 'altro modern games specs to reach the height',
+    description: 'The genesis NFT from Altro-Verse, unlocking exclusive gaming avatars, skins, and in-game perks.',
   },
   {
     name: 'fiction',
-    title: 'Weeney Azure',
+    title: 'Weeney Azure Artifact',
     image: '/images/cr-2.jpeg',
-    description: 'altro modern games specs to reach the height altro modern games specs to reach the height altro modern games specs to reach the height',
+    description: 'A limited-edition collectible from the Weeney Azure NFT series, featuring rare metadata and 3D visuals.',
   },
   {
     name: 'horror',
-    title: 'Glucian',
-    image: '/images/cr-3.jpeg', 
-    description: 'altro modern games specs to reach the height',
+    title: 'Glucian: Cursed Relic',
+    image: '/images/cr-3.jpeg',
+    description: 'Own the cursed relic NFT from the Glucian collection, a hauntingly rare piece with eerie digital effects.',
   },
   {
     name: 'action',
-    title: 'Alcianoro rezzi',
+    title: 'Alcianoro Rezzi Battle Badge',
     image: '/images/cr-4.jpg',
-    description: 'altro modern games specs to reach the height',
+    description: 'Claim the ultimate battle badge NFT from the Alcianoro Rezzi collection, designed for digital warriors.',
   },
   {
     name: 'action',
-    title: 'Questino Fixa',
+    title: 'Questino Fixa Legacy Blade',
     image: '/images/cr-5.jpg',
-    description: 'altro modern games specs to reach the height',
+    description: 'A one-of-a-kind NFT depicting the legendary blade, a symbol of strength and legacy in Questino Fixa.',
   },
   {
     name: 'fiction',
-    title: 'Untitled Fiction', 
+    title: 'Chronicles of Eternity NFT Card',
     image: '/images/cr-6.jpeg',
-    description: 'altro modern games specs to reach the height',
+    description: 'A rare NFT card from the Chronicles of Eternity collection, perfect for digital collectors and storytellers.',
   },
   {
     name: 'game',
-    title: 'Octapus Goaty',
-    image: '/images/cr-7.jpeg',
-    description: 'altro modern games specs to reach the height',
+    title: 'Octapus Goaty Skin Pack',
+    image: '/images/f23.jpeg',
+    description: 'Dive into the depths with the Octapus Goaty NFT, granting access to exclusive underwater skins.',
   },
-
   {
     name: 'action',
-    title: 'Rebotro Ocian',
-    image: '/images/cr-8.jpg',
-    description: 'altro modern games specs to reach the height',
+    title: 'Rebotro Ocian Mech Token',
+    image: '/images/f27.jpg',
+    description: 'A premium NFT from the Rebotro Ocian series, featuring detailed mech designs and unlockable content.',
   },
   {
     name: 'game',
-    title: 'Rider of Pensunia',
+    title: 'Pensunia Explorer Badge',
     image: '/images/cr-9.jpg',
-    description: 'altro modern games specs to reach the height',
+    description: 'Own a unique NFT badge that commemorates exploration in the mysterious Pensunia realm.',
   },
   {
     name: 'fiction',
-    title: 'Mariline Orazzy',
+    title: 'Mariline Orazzy Cosmic Key',
     image: '/images/cr-10.jpeg',
-    description: 'altro modern games specs to reach the height',
+    description: 'The Cosmic Key NFT from Mariline Orazzy, a gateway to exclusive cosmic art and virtual events.',
   },
 ];
+
 
 
 export const trendingNft = [
