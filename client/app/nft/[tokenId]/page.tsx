@@ -1,9 +1,8 @@
+import NftDetails from '@/components/pages/detailsNft'
 import React from 'react'
 
 function page() {
-  return (
-    <div>page</div>
-  )
+  return <NftDetails/>
 }
 
 export default page
