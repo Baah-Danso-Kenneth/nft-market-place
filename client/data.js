@@ -68,7 +68,7 @@ export const carouselNft = [
   {
     name: 'action',
     title: 'Rebotro Ocian Mech Token',
-    image: '/images/f27.jpg',
+    image: '/images/f27.jpeg',
     description: 'A premium NFT from the Rebotro Ocian series, featuring detailed mech designs and unlockable content.',
   },
   {
