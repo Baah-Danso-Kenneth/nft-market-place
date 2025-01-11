@@ -38,9 +38,9 @@ return (
               from-gray-900/90 to-transparent space-y-5 p-10 text-white
               font-nunito"
             >
-              <p className="uppercase">{item.title}</p>
+              <p className="uppercase text-3xl font-bold">{item.title}</p>
               <p className='max-w-xl line-clamp-3'>{item.description}</p>
-              <p>{item.name}</p>
+              <p className='font-allura font-extrabold text-2xl capitalize'>{item.name}</p>
             </div>
           </div>
         ))}
