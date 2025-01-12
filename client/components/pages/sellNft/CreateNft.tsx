@@ -5,6 +5,8 @@ import { uploadFileToIPFS, uploadJSONToIPFS } from "../../../app/pinata";
 import marketplace from "../../../app/marketplace.json";
 import { ethers } from "ethers";
 import { WalletContext } from "@/content/wallet";
+import { Cloud, Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 
 export default function SellNFT() {
@@ -95,56 +97,58 @@ export default function SellNFT() {
   return (
     <div>
       {isConnected ? (
-        <div>
-          <div>
-            <h2>Upload your NFT</h2>
+        <div className="flex justify-between mx-10 gap-20 py-20">
+
+          <div className="w-[40%]">
             <div>
-              <div>
-                <label>NFT name</label>
-                <input
-                  type="text"
-                  value={formParams.name}
-                  onChange={(e) =>
-                    updateFormParams({ ...formParams, name: e.target.value })
-                  }
-                />
-              </div>
-              <div>
-                <label>NFT description</label>
-                <textarea
-                  value={formParams.description}
-                  onChange={(e) =>
-                    updateFormParams({
-                      ...formParams,
-                      description: e.target.value,
-                    })
-                  }
-                />
-              </div>
-              <div>
-                <label>Price (in Eth)</label>
-                <input
-                  type="number"
-                  value={formParams.price}
-                  onChange={(e) =>
-                    updateFormParams({ ...formParams, price: e.target.value })
-                  }
-                />
-              </div>
-              <div>
-                <label>Upload image</label>
-                <input
-                  type="file"
-                  onChange={onFileChange}
-                />
-              </div>
-              <br />
-              <div>{message}</div>
-              <button onClick={listNFT} type="submit">
-                {btnContent}
-              </button>
+              <h1 className="text-4xl font-extrabold">Create Nft</h1>
+              <p>Keep nft created cannot be reverted so please locked that in</p>
             </div>
+
+            <div className="border border-dashed border-blue-500 rounded-md  h-[50vh] flex flex-col justify-center items-center">
+                 <Cloud className="w-40 h-28"/>
+                 <div><h1>Drag and drop files</h1></div>
+  
+                 <div className="flex flex-col justify-center items-center mt-5">
+                     <label htmlFor="" className="text-[20px] block mb-3">Upload images</label>
+                     <input type="file"  className="w-full py-3" value={formParams.name} onChange={onFileChange}/>
+                  </div>
+
+            </div>
+
+
           </div>
+
+          <div className="w-[60%]">
+            <div>
+              <h1 className="font-bold mb-3">Create*</h1>
+            </div>
+              <div className=" flex items-center w-[50%] mb-3 rounded-2xl border space-x-4 h-auto py-6">
+                <Plus className="ml-3 bg-black rounded-md text-white "/>
+                <h1 className="text-nowrap text-3xl">Create Nft collection</h1>
+              </div>
+
+                <form className="space-y-3 uppercase">
+                  <div>
+                     <label htmlFor="" className="text-[20px] block mb-3">name</label>
+                     <input type="text" className="w-full py-3 bg-transparent border border-black rounded-md" value={formParams.name} onChange={(e)=>updateFormParams({...formParams,name:e.target.value})}/>
+                  </div>
+
+                  <div>
+                     <label htmlFor="" className="text-[20px] block mb-3">price</label>
+                     <input type="text" className="w-full py-3" value={formParams.name} onChange={(e)=>updateFormParams({...formParams,name:e.target.value})}/>
+                  </div>
+
+                  <div>
+                     <label htmlFor="" className="text-[20px] block mb-3">description</label>
+                     <input type="text" className="w-full py-3" value={formParams.name} onChange={(e)=>updateFormParams({...formParams,name:e.target.value})}/>
+                  </div>
+
+                  <Button className="w-full py-5">Create</Button>
+                 
+                </form>
+          </div>
+
         </div>
       ) : (
         <div>
