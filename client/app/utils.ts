@@ -1,6 +1,6 @@
-export default function GetIpfsUrlFromPinata(pinataUrl:any) {
-    let IPFSUrl = pinataUrl.split("/");
-    const lastIndex = IPFSUrl.length;
-    IPFSUrl = "https://ipfs.io/ipfs/" + IPFSUrl[lastIndex - 1];
-    return IPFSUrl;
-  }
+export default function GetIpfsUrlFromPinata(pinataUrl: string): string {
+  const IPFSUrlParts = pinataUrl.split("/");
+  const lastIndex = IPFSUrlParts.length - 1;
+  const IPFSUrl = "https://ipfs.io/ipfs/" + IPFSUrlParts[lastIndex];
+  return IPFSUrl;
+}
