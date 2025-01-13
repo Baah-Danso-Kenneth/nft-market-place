@@ -45,13 +45,13 @@ type NftCarouselProp = {
         return;
       }
   
-      let contract = new ethers.Contract(
+      const contract = new ethers.Contract(
         MarketplaceJson.address,
         MarketplaceJson.abi,
         signer
       );
   
-      let transaction = await contract.getAllListedNFTs();
+      const transaction = await contract.getAllListedNFTs();
   
       for (const i of transaction) {
         const tokenId = parseInt(i.tokenId);

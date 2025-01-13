@@ -1,5 +1,3 @@
-import Image from "next/image"
-
 function HugeText() {
   return (
     <div className=' text-[0.8rem] flex flex-col w-full border-t border-b border-black  dark:border-white md:text-[3rem] lg:text-[4.5rem] '>

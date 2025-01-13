@@ -5,9 +5,6 @@ import Banner from './Banner'
 import HugeText from './HugeText'
 import BePartOfUs from './BepartOfUs'
 import OurCollection from './OurCollection'
-import RotationContent from '@/components/Rotation'
-import pic from '../../../public/images/base2_nft.png';
-import { Pickaxe } from 'lucide-react'
 import MoveUp from './MoveUp'
 import AboutUs from './AboutUs'
 

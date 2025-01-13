@@ -1,11 +1,126 @@
-import { ArrowUpToLine, Dot, Ellipsis, Pen, Settings, User, Wallet } from 'lucide-react'
+"use client"
+import { WalletContext } from '@/content/wallet';
+import axios from 'axios';
+import { ethers } from 'ethers';
+import { ArrowUpToLine, Dot, Ellipsis, Pen,Wallet } from 'lucide-react'
 import Image from 'next/image'
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import MarketplaceJson from '../../../app/marketplace.json'
+import NftCard from '../marketPlace/NftCard';
+
+
+type NFTItem = {
+  price: string;
+  tokenId: number;
+  title:string;
+  owner: string;
+  image: string;
+  name: string;
+  description: string;
+  sumPrice?: number
+};
+
+
+type NftCarouselProp = {
+    name: string;
+    title: string;
+    image: string;
+    tokenId: string;
+    description: string;
+    price?: string;
+    date_created?: string;
+    category?: string;
+    buzz?: string;
+    sold?: boolean;
+    isVertical?: boolean;
+    promo?: boolean;
+  };
+
 
 function ProfileContent() {
+  const [items, setItems] = useState<NftCarouselProp[] | undefined>();
+  const { isConnected, signer, userAddress } = useContext(WalletContext) ?? {};
+  const [sumPrice, setSumPrice]=useState("0");
+
+  async function getNFTitems() {
+    const itemsArray: NftCarouselProp[] = [];
+    let sumPrice=0;
+    if (!signer) {
+      console.error("Signer is not available");
+      return;
+    }
+
+    const contract = new ethers.Contract(
+      MarketplaceJson.address,
+      MarketplaceJson.abi,
+      signer
+    );
+
+    const transaction = await contract.getMyNFTs();
+
+    for (const i of transaction) {
+      const tokenId = parseInt(i.tokenId);
+      const tokenURI = await contract.tokenURI(tokenId);
+      const meta = (await axios.get(tokenURI)).data as {
+        image: string;
+        name: string;
+        description: string;
+      };
+      const price = ethers.formatEther(i.price);
+
+      // Create an NFTItem from the raw data
+      const item: NFTItem = {
+        price,
+        tokenId,
+        owner: i.owner,
+        image: meta.image,
+        title: meta.name,
+        name: meta.name,
+        description: meta.description,
+      };
+
+      // Map NFTItem to NftCarouselProp
+      const cardItem: NftCarouselProp = {
+        name: item.name,
+        title: item.title,
+        image: item.image,
+        tokenId: item.tokenId.toString(),
+        description: item.description,
+        price: item.price,
+        date_created: undefined, // Default values for optional fields
+        category: undefined,
+        buzz: undefined,
+        sold: false,
+        isVertical: false,
+        promo: false,
+      };
+
+      itemsArray.push(cardItem);
+      sumPrice += Number(price)
+    }
+    setSumPrice(sumPrice.toFixed(2))
+    return itemsArray;
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const itemsArray = await getNFTitems();
+        setItems(itemsArray);
+      } catch (error) {
+        console.error("Error fetching NFT items:", error);
+      }
+    };
+
+    fetchData();
+  }, [isConnected]);
+
+
   return (
     <div>
-        <div className='w-full h-[50vh] relative   border-black shadow-lg'>
+       {isConnected ?
+        (
+          <div className='w-full  relative   border-black shadow-lg'>
           <Image
            src="/images/carbon-fibre-big.png"
            alt="clean"
@@ -41,22 +156,22 @@ function ProfileContent() {
                 </div>
               </div>
 
-              <div><h1 className='text-3xl font-nunito font-bold dark:text-white'>Protection</h1></div>
+              <div><h1 className='text-3xl font-nunito font-bold dark:text-white'>{sumPrice}</h1></div>
 
               <div className='flex items-center gap-5 text-white'>
            
                 <div className='flex space-x-2 text-black dark:text-white'>
-                  <User/>
-                  <h1 className='font-bold font-nunito text-nowrap'>Kuntu blankson</h1>
+                  <h1>N0: of NFTs</h1>
+                  <h1 className='font-bold font-nunito text-nowrap'>{items?.length}</h1>
                 </div>
                 
                 <div className='flex space-x-2 dark:text-white'>
                   <Wallet className='text-black dark:text-white'/>
-                  <h1 className='text-black dark:text-white'>0xfff08000.......</h1>
+                 
+                  <h1 className='text-black dark:text-white'>{userAddress?.slice(0,8)}...</h1>
                 </div>
 
                 </div>
-
             </div> 
 
               </div>
@@ -68,7 +183,20 @@ function ProfileContent() {
 
             </div>
 
-          </div>
+             {items && items.length > 0 ?
+              (<div className='grid grid-cols-2'>
+               {items?.map((value)=>(
+                <NftCard nft={value} key={value.name}/>
+               ))}
+              </div>)
+              : 
+                <div>no nft &apos;s</div>}
+             </div>
+            )
+           :
+        (
+          <h1>You are not connected</h1>
+        )}
     </div>
   )
 }

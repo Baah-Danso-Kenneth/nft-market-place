@@ -1,9 +1,10 @@
 "use server";
 
-const axios = require("axios");
-const jwt = process.env.PINATA_JWT;
+import axios from "axios";
 
-export const uploadJSONToIPFS = async (JSONBody:any) => {
+const jwt = process.env.NEW_JWT;
+
+export const uploadJSONToIPFS = async (JSONBody: Record<string, unknown>) => {
   const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
   try {
     const res = await axios.post(url, JSONBody, {
@@ -17,18 +18,26 @@ export const uploadJSONToIPFS = async (JSONBody:any) => {
       success: true,
       pinataURL: "https://gateway.pinata.cloud/ipfs/" + res.data.IpfsHash,
     };
-  } catch (error:any) {
-    console.error("Error uploading JSON to Pinata:", error);
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      console.error("Error uploading JSON to Pinata:", error.response?.data);
+      return {
+        success: false,
+        message: error.response?.data || "Unknown error",
+      };
+    }
+    console.error("An unexpected error occurred:", error);
     return {
       success: false,
-      message: error.message || "Unknown error",
+      message: "An unexpected error occurred",
     };
   }
 };
 
-export const uploadFileToIPFS = async (data:any) => {
+export const uploadFileToIPFS = async (data: FormData) => {
+  const file = data.get("file");
   const pinataMetadata = JSON.stringify({
-    name: data.get("file").name,
+    name: file instanceof File ? file.name : "unknown",
   });
   data.append("pinataMetadata", pinataMetadata);
 
@@ -42,7 +51,7 @@ export const uploadFileToIPFS = async (data:any) => {
       "https://api.pinata.cloud/pinning/pinFileToIPFS",
       data,
       {
-        maxBodyLength: "Infinity",
+        maxBodyLength: Infinity, // Fixed to a numeric value
         headers: {
           "Content-Type": `multipart/form-data`,
           Authorization: `Bearer ${jwt}`,
@@ -55,11 +64,18 @@ export const uploadFileToIPFS = async (data:any) => {
       success: true,
       pinataURL: "https://gateway.pinata.cloud/ipfs/" + res.data.IpfsHash,
     };
-  } catch (error:any) {
-    console.error("Error uploading file to Pinata:", error);
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      console.error("Error uploading file to Pinata:", error.response?.data);
+      return {
+        success: false,
+        message: error.response?.data || "Unknown error",
+      };
+    }
+    console.error("An unexpected error occurred:", error);
     return {
       success: false,
-      message: error.message || "Unknown error",
+      message: "An unexpected error occurred",
     };
   }
 };
