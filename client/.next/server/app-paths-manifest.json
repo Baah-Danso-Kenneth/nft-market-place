@@ -1,0 +1,9 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/sellNFT/page": "app/sellNFT/page.js",
+  "/page": "app/page.js",
+  "/marketPlace/page": "app/marketPlace/page.js",
+  "/nft/[tokenId]/page": "app/nft/[tokenId]/page.js",
+  "/profile/page": "app/profile/page.js"
+}
