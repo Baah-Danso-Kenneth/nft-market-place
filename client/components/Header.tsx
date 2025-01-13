@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ThemeToggler } from "./ThemeToggler";
 import { Menu } from "lucide-react";
-import { useContext, useState } from "react";
+import { useContext} from "react";
 import { WalletContext } from "@/content/wallet";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "./ui/button";
@@ -24,7 +24,6 @@ function Header() {
     setIsConnected,
     userAddress,
     setUserAddress,
-    signer,
     setSigner,
     showToggle,
     toggleShow,

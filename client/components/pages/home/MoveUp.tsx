@@ -5,6 +5,7 @@ import ArrowUpImage from '../../../public/images/move_up.png';
 
 
 
+
 const MoveUp=() => {
 
   const scrollToTop = () => {
@@ -17,6 +18,7 @@ const MoveUp=() => {
   return (
     <div className='absolute lg:translate-x-[80rem] lg:-translate-y-36 xl:translate-x-[70rem]'>
       <div onClick={scrollToTop} className='cursor-pointer'> 
+        
         <Image 
           src={ArrowUpImage}
           width={250} 

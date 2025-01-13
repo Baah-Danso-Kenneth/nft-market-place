@@ -1,5 +1,12 @@
 import Image from "next/image"
 import Link from "next/link"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+
 
 
 function Banner() {
@@ -35,9 +42,20 @@ function Banner() {
                  Distinctio consequuntur laudantium atque ducimus 
                  blanditiis, consectetur aliquid asperiores excepturi repellat nisi?</p>
           </div> */}
-          <Link href="/sellNFT" className="absolute -left-20 top-[5rem] lg:top-[27rem] xl:top-[10rem]">
+
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+            <Link href="/sellNFT" className="absolute -left-20 top-[5rem] lg:top-[27rem] xl:top-[10rem]">
             <Image src="/images/buy_nft.png" alt="logox" className=" object-contain w-40 h-40 lg:w-96 lg:h-96" width={1080} height={200}/>
           </Link>
+          <TooltipContent>
+             <h1>Create Nft</h1>
+          </TooltipContent>
+            </TooltipTrigger>
+          </Tooltip>
+        </TooltipProvider>
+ 
 
         </div>
 

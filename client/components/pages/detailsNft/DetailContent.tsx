@@ -7,7 +7,7 @@ import GetIpfsUrlFromPinata from "@/app/utils";
 import Image from "next/image";
 import { WalletContext } from "@/content/wallet";
 import MarketPlaceJson from "../../../app/marketplace.json";
-import { Book, Brush, Clock, Eye, Heart, Menu, Send, ShoppingCart } from "lucide-react";
+import { Book, Brush, Clock, Eye, Heart, Menu, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type Item = {
@@ -24,8 +24,8 @@ function DetailContent() {
   const params = useParams();
   const tokenId = params.tokenId as string;
   const [item, setItem] = useState<Item | null>(null);
-  const [msg, setMsg] = useState("");
-  const [btnContent, setBtnContent] = useState("BUY NFT");
+  const [ msg,setMsg] = useState<string>("");
+  const [ btnContent,setBtnContent] = useState("BUY NFT");
   const { isConnected, userAddress, signer } = useContext(WalletContext)!;
   const router = useRouter();
 
@@ -61,8 +61,13 @@ function DetailContent() {
       try {
         const itemTemp = await getNFTData();
         setItem(itemTemp);
-      } catch (error: any) {
-        console.error("Error fetching item:", error);
+      } catch (error: unknown) {
+        if(error instanceof Error){
+
+          console.error("Error fetching item:", error);
+        }else{
+          console.error("unexpected error")
+        }
         setItem(null);
       }
     }
@@ -166,36 +171,43 @@ function DetailContent() {
 
               <div className='flex gap-10'>
 
-              <div className='w-[50%] h-auto flex ml-5'>
+{userAddress?.toLocaleLowerCase() === item.seller ? (
+    <div className='w-[50%] h-auto flex ml-5'>
   <Button 
     onClick={buyNFT} 
     className="w-full bg-blue-700 rounded-md flex justify-between items-center"
   >
     <div className="w-[80%] mx-3 border-r border-white ">
-      <h1 className="text-center font-nunito text-white uppercase text-2xl">Buy Nft</h1>
+      <h1 className="text-center font-nunito text-white uppercase text-2xl">{btnContent}</h1>
     </div>
     <div className="py-3">
       <ShoppingCart className="text-white" />
     </div>
   </Button>
-</div>;
+</div>
+) : (
+    <h1>{msg}</h1>
+)}
 
-                
-<div className='w-[50%] h-auto flex ml-5'>
-  <Button 
-    onClick={buyNFT} 
-    className="w-full bg-red-700 rounded-md flex justify-between items-center"
-  >
-    <div className="w-[80%] mx-3 border-r border-white">
-      <h1 className="text-center font-nunito text-white uppercase text-2xl">cancel</h1>
-    </div>
-    <div className="py-3">
-      <ShoppingCart className="text-white" />
-    </div>
-  </Button>
-</div>;
 
-              </div>
+
+  {userAddress?.toLocaleLowerCase() === item.seller ? (
+    <div className='w-[50%] h-auto flex ml-5'>
+    <Button 
+      onClick={buyNFT} 
+      className="w-full bg-red-700 rounded-md flex justify-between items-center"
+    >
+      <div className="w-[80%] mx-3 border-r border-white">
+        <h1 className="text-center font-nunito text-white uppercase text-2xl">cancel</h1>
+      </div>
+      <div className="py-3">
+        <ShoppingCart className="text-white" />
+      </div>
+    </Button>
+  </div>
+  ):null}              
+
+ </div>
 
 
             </div>

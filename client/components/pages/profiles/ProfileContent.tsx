@@ -2,7 +2,7 @@
 import { WalletContext } from '@/content/wallet';
 import axios from 'axios';
 import { ethers } from 'ethers';
-import { ArrowUpToLine, Divide, Dot, Ellipsis, Pen,  User, Wallet } from 'lucide-react'
+import { ArrowUpToLine, Dot, Ellipsis, Pen,Wallet } from 'lucide-react'
 import Image from 'next/image'
 import React, { useContext, useEffect, useState } from 'react'
 import MarketplaceJson from '../../../app/marketplace.json'
@@ -17,6 +17,7 @@ type NFTItem = {
   image: string;
   name: string;
   description: string;
+  sumPrice?: number
 };
 
 
@@ -39,21 +40,23 @@ type NftCarouselProp = {
 function ProfileContent() {
   const [items, setItems] = useState<NftCarouselProp[] | undefined>();
   const { isConnected, signer, userAddress } = useContext(WalletContext) ?? {};
+  const [sumPrice, setSumPrice]=useState("0");
 
   async function getNFTitems() {
     const itemsArray: NftCarouselProp[] = [];
+    let sumPrice=0;
     if (!signer) {
       console.error("Signer is not available");
       return;
     }
 
-    let contract = new ethers.Contract(
+    const contract = new ethers.Contract(
       MarketplaceJson.address,
       MarketplaceJson.abi,
       signer
     );
 
-    let transaction = await contract.getMyNFTs();
+    const transaction = await contract.getMyNFTs();
 
     for (const i of transaction) {
       const tokenId = parseInt(i.tokenId);
@@ -93,7 +96,9 @@ function ProfileContent() {
       };
 
       itemsArray.push(cardItem);
+      sumPrice += Number(price)
     }
+    setSumPrice(sumPrice.toFixed(2))
     return itemsArray;
   }
 
@@ -151,7 +156,7 @@ function ProfileContent() {
                 </div>
               </div>
 
-              <div><h1 className='text-3xl font-nunito font-bold dark:text-white'>Protection</h1></div>
+              <div><h1 className='text-3xl font-nunito font-bold dark:text-white'>{sumPrice}</h1></div>
 
               <div className='flex items-center gap-5 text-white'>
            
@@ -181,11 +186,11 @@ function ProfileContent() {
              {items && items.length > 0 ?
               (<div className='grid grid-cols-2'>
                {items?.map((value)=>(
-                <NftCard nft={value}/>
+                <NftCard nft={value} key={value.name}/>
                ))}
               </div>)
               : 
-                <div>no nft's</div>}
+                <div>no nft &apos;s</div>}
              </div>
             )
            :

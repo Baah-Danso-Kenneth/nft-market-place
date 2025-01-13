@@ -1,6 +1,5 @@
 "use client"
 import React from 'react'
-import { carouselNft } from '@/data'
 import Image from 'next/image'
 import useEmblaCarousel from "embla-carousel-react"
 import AutoPlay from "embla-carousel-autoplay"
